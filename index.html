@@ -316,6 +316,19 @@
             .stat-value { font-size: 24px; }
             button { padding: 8px 16px; font-size: 12px; }
         }
+        @media (max-width: 768px) {
+  table, th, td {
+    font-size: 10px !important;
+    padding: 5px !important;
+  }
+}
+@media (max-width: 480px) {
+  table, th, td {
+    font-size: 8px !important;
+    padding: 2px !important;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -389,18 +402,29 @@
     let editingId = null;
 
     // Create binary rain effect
-    function createBinaryRain() {
-        const container = document.getElementById('binaryRain');
-        for (let i = 0; i < 15; i++) {
-            const column = document.createElement('div');
-            column.className = 'binary-column';
-            column.style.left = `${i * 7}%`;
-            column.style.animationDuration = `${5 + Math.random() * 5}s`;
-            column.style.animationDelay = `${Math.random() * 5}s`;
-            column.textContent = Array(10).fill(0).map(() => Math.random() > 0.5 ? '1' : '0').join('\n');
-            container.appendChild(column);
-        }
-    }
+function createBinaryRain() {
+  const container = document.getElementById("binaryRain");
+  if (!container) return;
+  container.innerHTML = "";
+  const screenWidth = window.innerWidth;
+  // Dynamically use columns as before or adapt if you hard-coded
+  let columns = screenWidth < 600 ? 10 : 15;
+  for (let i = 0; i < columns; i++) {
+    const column = document.createElement("div");
+    column.className = "binary-column";
+    column.style.left = `${(i / columns) * 100}%`;
+    column.style.animationDuration = `${5 + Math.random() * 5}s`;
+    column.style.animationDelay = `${Math.random() * 5}s`;
+    column.textContent = Array(10)
+      .fill(0)
+      .map(() => (Math.random() < 0.5 ? 1 : 0))
+      .join("");
+    container.appendChild(column);
+  }
+}
+window.addEventListener("resize", createBinaryRain);
+window.addEventListener("DOMContentLoaded", createBinaryRain);
+
 
     async function loadLeaderboard() {
         try {
