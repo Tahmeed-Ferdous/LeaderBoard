@@ -42,12 +42,12 @@
             position: absolute;
             color: #0f0;
             font-size: 12px;
-            animation: fall linear infinite;
+            animation: floatUp linear infinite;
         }
         
-        @keyframes fall {
-            0% { transform: translateY(-100px); opacity: 0.5; }
-            100% { transform: translateY(100vh); opacity: 0; }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh); opacity: 0.5; }
+            100% { transform: translateY(-100px); opacity: 0; }
         }
         
         .container {
@@ -410,18 +410,14 @@
             
             if (leaderboard.length === 0) {
                 leaderboard = [
-                    { id: 1, name: 'Alex Johnson', designation: 'Senior Developer', submissions: 45, points: 892 },
-                    { id: 2, name: 'Sarah Chen', designation: 'Tech Lead', submissions: 38, points: 756 },
-                    { id: 3, name: 'Mike Rodriguez', designation: 'Full Stack Dev', submissions: 32, points: 640 }
+                    { id: 1, name: 'Tahmeed Ferdous', designation: 'Senior Executive', submissions: 1, points: 0 },
                 ];
                 await saveLeaderboard();
             }
         } catch (err) {
             console.error('Error loading:', err);
             leaderboard = [
-                { id: 1, name: 'Alex Johnson', designation: 'Senior Developer', submissions: 45, points: 892 },
-                { id: 2, name: 'Sarah Chen', designation: 'Tech Lead', submissions: 38, points: 756 },
-                { id: 3, name: 'Mike Rodriguez', designation: 'Full Stack Dev', submissions: 32, points: 640 }
+                { id: 1, name: 'Tahmeed Ferdous', designation: 'Senior Executive', submissions: 1, points: 0 },
             ];
         }
         renderLeaderboard();
